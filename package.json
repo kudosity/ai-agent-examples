@@ -1,0 +1,35 @@
+{
+  "name": "ai-agent-examples",
+  "version": "1.0.0",
+  "description": "Copy-paste examples for sending SMS, MMS, WhatsApp, and RCS from AI agents and AI workflows with Kudosity — the messaging action layer for AI agents.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.6.0"
+  },
+  "scripts": {
+    "send-sms": "node --env-file=.env openai-agent-send-sms/app.js",
+    "sales-followup": "node --env-file=.env ai-sales-followup-sms/app.js",
+    "appointment-reminder": "node --env-file=.env ai-appointment-reminder-sms/app.js",
+    "product-launch-mms": "node --env-file=.env ai-product-launch-mms/app.js",
+    "order-update-whatsapp": "node --env-file=.env ai-order-update-whatsapp-template/app.js",
+    "payment-reminder-whatsapp": "node --env-file=.env ai-payment-reminder-whatsapp-template/app.js",
+    "delivery-update-rcs": "node --env-file=.env ai-delivery-update-rcs/app.js",
+    "payment-reminder-rcs": "node --env-file=.env ai-payment-reminder-rcs/app.js"
+  },
+  "keywords": [
+    "ai-agents",
+    "ai-workflows",
+    "send-sms-from-ai-agent",
+    "sms-api",
+    "mms-api",
+    "whatsapp-api",
+    "rcs-api",
+    "customer-notifications",
+    "openai",
+    "claude",
+    "messaging",
+    "automation",
+    "kudosity"
+  ],
+  "license": "MIT"
+}
