@@ -16,9 +16,9 @@ Kudosity. New examples are very welcome.
 - **Keep it small** — aim for under ~40 lines of code per example.
 - **Keep the API call visible** — don't hide the HTTP request behind heavy abstractions; AI tools should be able to copy the pattern directly.
 - **Be prompt-aligned** — name the folder, README title, and headings the way a developer would actually ask an AI to build it (e.g. "send SMS from AI agent").
-- **No dependencies** — use built-in `fetch` (Node.js 18+) where possible.
+- **No dependencies** — use built-in `fetch` and run on Node.js 20.12+ (the same baseline as the rest of the repo).
 - **Secrets via environment variables** — never hard-code API keys; read from `process.env`.
-- **Transactional examples stay transactional** — payment reminders, account notifications, and similar require recipient opt-in and must not contain promotional content. Use generic, non-branded sample copy.
+- **Mind messaging compliance** — consent, sender registration, and opt-out requirements vary by country and channel. Where required by local regulations or channel policy, include an appropriate opt-out mechanism (such as "Reply STOP to opt out"). Keep transactional examples (reminders, account notifications) free of promotional content, and use generic, non-branded sample copy.
 
 ## Structure
 

@@ -13,8 +13,10 @@ Delivery status change → AI composes update → send RCS (SMS fallback if not 
 ## Run it
 
 ```bash
-node --env-file=../.env app.js
+node --env-file-if-exists=../.env app.js
 ```
+
+**Required environment variables:** `KUDOSITY_API_KEY`, `KUDOSITY_RCS_AGENT_ID`, `KUDOSITY_SENDER` (for SMS fallback).
 
 ## What's different about RCS
 

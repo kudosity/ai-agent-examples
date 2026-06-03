@@ -1,8 +1,32 @@
 // ai-payment-reminder-whatsapp-template — AI sends a payment reminder via a pre-approved WhatsApp template.
-// Payment reminder via a pre-approved WhatsApp template — no promotional content.
+// A transactional payment reminder sent through a pre-approved WhatsApp template.
 
 const API_KEY = process.env.KUDOSITY_API_KEY;
 const SENDER = process.env.KUDOSITY_WHATSAPP_SENDER; // registered WhatsApp sender number (E.164)
+
+// Fail fast with a helpful message when configuration is missing.
+const missing = Object.entries({ KUDOSITY_API_KEY: API_KEY, KUDOSITY_WHATSAPP_SENDER: SENDER })
+  .filter(([, v]) => !v || v === "your_api_key_here")
+  .map(([k]) => k);
+if (missing.length) {
+  console.error(`Missing config: ${missing.join(", ")}.`);
+  console.error("Copy .env.example to .env, fill it in, then run: node --env-file-if-exists=.env app.js");
+  process.exit(1);
+}
+
+// One response-handling pattern for every Kudosity call: throw on error (status + body),
+// parse JSON safely, and unwrap the { data } envelope the WhatsApp/RCS endpoints use.
+async function postToKudosity(path, body) {
+  const res = await fetch(`https://api.transmitmessage.com${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-api-key": API_KEY },
+    body: JSON.stringify(body),
+  });
+  const text = await res.text();
+  if (!res.ok) throw new Error(`Kudosity ${path} failed: ${res.status} ${text}`);
+  const json = text ? JSON.parse(text) : {};
+  return json.data ?? json;
+}
 
 // WhatsApp template messages must use a pre-approved template name.
 async function sendWhatsAppTemplate(sender, recipient, templateName, templateParams, messageRef) {
@@ -14,13 +38,7 @@ async function sendWhatsAppTemplate(sender, recipient, templateName, templatePar
     content: { template: { name: templateName, parameters: templateParams } },
   };
   if (messageRef) body.message_ref = messageRef;
-  const res = await fetch("https://api.transmitmessage.com/v2/whatsapp/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "x-api-key": API_KEY },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) throw new Error(`Kudosity WhatsApp failed: ${res.status} ${await res.text()}`);
-  return res.json();
+  return postToKudosity("/v2/whatsapp/messages", body);
 }
 
 // --- AI workflow: outstanding balance detected → send payment-reminder template ---
@@ -34,4 +52,4 @@ const result = await sendWhatsAppTemplate(
   [account.name, account.last4, account.balance], // positional → {1}, {2}, {3}
   `invoice-${account.invoiceId}`,
 );
-console.log("Payment reminder → WhatsApp template sent:", result.data?.id ?? result.id);
+console.log("Payment reminder → WhatsApp template sent — message id:", result.id);

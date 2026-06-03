@@ -20,18 +20,42 @@ Add this to your `claude_desktop_config.json` (v2 auth uses the `x-api-key` head
 
 ## Cursor / Windsurf
 
+The Kudosity MCP server authenticates with your API key in the `x-api-key` header — the bare URL
+alone won't authenticate. Use a client that supports custom headers and add the header explicitly:
+
 ```json
 {
   "mcpServers": {
-    "kudosity": { "url": "https://developers.kudosity.com/mcp" }
+    "kudosity": {
+      "url": "https://developers.kudosity.com/mcp",
+      "headers": { "x-api-key": "YOUR_API_KEY" }
+    }
+  }
+}
+```
+
+If your MCP client only accepts a URL (no `headers` field), bridge to it with `mcp-remote`, which
+injects the header for you — the same approach as the Claude Desktop config above:
+
+```json
+{
+  "mcpServers": {
+    "kudosity": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://developers.kudosity.com/mcp", "--header", "x-api-key: ${KUDOSITY_API_KEY}"],
+      "env": { "KUDOSITY_API_KEY": "YOUR_API_KEY" }
+    }
   }
 }
 ```
 
 ## Claude Code (CLI)
 
+Pass the API key as a header when adding the server:
+
 ```bash
-claude mcp add kudosity --scope project -- npx mcp-remote https://developers.kudosity.com/mcp
+claude mcp add kudosity --scope project \
+  -- npx mcp-remote https://developers.kudosity.com/mcp --header "x-api-key: YOUR_API_KEY"
 ```
 
 ## Example prompts

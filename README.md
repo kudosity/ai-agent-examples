@@ -10,6 +10,10 @@ a customer, these patterns turn that decision into a real SMS, MMS, WhatsApp, or
 Each example is one short, dependency-free Node.js file. The HTTP call to Kudosity is kept
 visible and easy to copy — drop it straight into your own AI workflow.
 
+## Requirements
+
+- **Node.js 20.12+** — examples use the built-in `fetch` and the `--env-file-if-exists` flag, so there's nothing to install.
+
 ## Quickstart
 
 1. **Sign up** for a trial at [kudosity.com/trial](https://kudosity.com/trial).
@@ -20,11 +24,25 @@ visible and easy to copy — drop it straight into your own AI workflow.
    cp .env.example .env
    # then edit .env with your API key and sender
    ```
-5. **Run an example** (Node.js 20.6+, no install needed — uses built-in `fetch` and `--env-file`):
+5. **Run an example:**
    ```bash
-   node --env-file=.env openai-agent-send-sms/app.js
-   # or: npm run send-sms
+   node --env-file-if-exists=.env openai-agent-send-sms/app.js
+   # or, equivalently: npm run send-sms
    ```
+
+Run any example before filling in `.env` and it exits immediately with a clear message telling
+you which variables to set — it won't make a network call.
+
+## Configuration
+
+Every example reads its credentials from environment variables (see [`.env.example`](.env.example)):
+
+| Variable | Used by | Notes |
+|---|---|---|
+| `KUDOSITY_API_KEY` | all examples | Your API key (Settings → API Settings). |
+| `KUDOSITY_SENDER` | SMS, MMS, and RCS SMS-fallback | A number or alphanumeric sender ID registered to your account. |
+| `KUDOSITY_WHATSAPP_SENDER` | WhatsApp examples | Your registered WhatsApp Business number (E.164). |
+| `KUDOSITY_RCS_AGENT_ID` | RCS examples | Your registered RCS agent ID — RCS sends through an agent, not a number. |
 
 ## Examples
 

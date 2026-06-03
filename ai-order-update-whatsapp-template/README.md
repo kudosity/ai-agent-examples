@@ -12,8 +12,10 @@ Order status update → AI selects template → send WhatsApp template message
 ## Run it
 
 ```bash
-node --env-file=../.env app.js
+node --env-file-if-exists=../.env app.js
 ```
+
+**Required environment variables:** `KUDOSITY_API_KEY`, `KUDOSITY_WHATSAPP_SENDER`.
 
 ## How WhatsApp templates work here
 

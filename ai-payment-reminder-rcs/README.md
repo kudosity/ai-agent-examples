@@ -13,12 +13,14 @@ Outstanding balance detected → AI composes reminder → send RCS (SMS fallback
 ## Run it
 
 ```bash
-node --env-file=../.env app.js
+node --env-file-if-exists=../.env app.js
 ```
+
+**Required environment variables:** `KUDOSITY_API_KEY`, `KUDOSITY_RCS_AGENT_ID`, `KUDOSITY_SENDER` (for SMS fallback).
 
 ## Notes
 
-- **Transactional only** — payment reminders require recipient opt-in and must not contain promotional content.
+- **Transactional message** — keep payment reminders free of promotional content. Messaging consent, sender registration, and opt-out requirements vary by country and channel; follow the rules that apply to your recipients. Where required, include an appropriate opt-out mechanism such as "Reply STOP to opt out".
 - **`sender` is a registered RCS agent ID, not a phone number** (set via `KUDOSITY_RCS_AGENT_ID`).
 - Always set `sms_fallback` so the reminder still lands on non-RCS devices.
 - `message_ref: "invoice-<id>"` ties delivery webhooks back to the invoice.

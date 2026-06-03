@@ -12,8 +12,10 @@ Calendar appointment → AI detects upcoming appointment → send reminder SMS
 ## Run it
 
 ```bash
-node --env-file=../.env app.js
+node --env-file-if-exists=../.env app.js
 ```
+
+**Required environment variables:** `KUDOSITY_API_KEY`, `KUDOSITY_SENDER`.
 
 ## Notes
 

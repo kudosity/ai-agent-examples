@@ -13,8 +13,10 @@ AI lead scoring → high-value lead detected → send SMS follow-up
 ## Run it
 
 ```bash
-node --env-file=../.env app.js
+node --env-file-if-exists=../.env app.js
 ```
+
+**Required environment variables:** `KUDOSITY_API_KEY`, `KUDOSITY_SENDER`.
 
 ## Notes
 
