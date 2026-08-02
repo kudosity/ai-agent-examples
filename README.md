@@ -17,7 +17,7 @@ visible and easy to copy — drop it straight into your own AI workflow.
 ## Quickstart
 
 1. **Sign up** for a trial at [kudosity.com/trial](https://kudosity.com/trial).
-2. **Get your API key** from the dashboard under **Settings → API Settings**.
+2. **Get your API key** from the dashboard under **Developers → API Settings**.
 3. **Register a sender** (a number or alphanumeric sender ID) for your destination country.
 4. **Configure your environment:**
    ```bash
@@ -39,7 +39,7 @@ Every example reads its credentials from environment variables (see [`.env.examp
 
 | Variable | Used by | Notes |
 |---|---|---|
-| `KUDOSITY_API_KEY` | all examples | Your API key (Settings → API Settings). |
+| `KUDOSITY_API_KEY` | all examples | Your API key (Developers → API Settings). |
 | `KUDOSITY_SENDER` | SMS, MMS, and RCS SMS-fallback | A number or alphanumeric sender ID registered to your account. |
 | `KUDOSITY_WHATSAPP_SENDER` | WhatsApp examples | Your registered WhatsApp Business number (E.164). |
 | `KUDOSITY_RCS_AGENT_ID` | RCS examples | Your registered RCS agent ID — RCS sends through an agent, not a number. |
