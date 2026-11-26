@@ -21,7 +21,8 @@ use Kudosity with the patterns below.
 | `sendSMS(recipient, message)` | SMS | `POST /v2/sms` |
 | `sendMMS(recipient, subject, message, imageUrl)` | MMS | `POST /v2/mms` |
 | `sendWhatsAppTemplate(sender, recipient, templateName, templateParams)` | WhatsApp | `POST /v2/whatsapp/messages` |
-| `sendRCS(agentId, recipient, message, fallbackSender)` | RCS | `POST /v2/rcs/messages` |
+| `sendRCS(agentId, recipient, message, suggestions, fallback)` | RCS text with suggestions | `POST /v2/rcs/messages` |
+| `sendRichCard(agentId, recipient, card, chips, fallback)` | RCS rich card | `POST /v2/rcs/messages` |
 
 ## API basics
 
@@ -35,4 +36,4 @@ use Kudosity with the patterns below.
 - **SMS:** requires `message`, `sender`, `recipient`.
 - **MMS:** requires `sender`, `recipient`, `content_urls` (single media file, absolute URL, ≤ 400 KB). `subject` ≤ 20 ASCII chars. Australia delivery only.
 - **WhatsApp:** requires `sender`, `recipient`, `content_type`, `content`. For templates, `content_type: "template"` and `content.template = { name, parameters }`; `parameters` is a positional array of strings. Templates must be pre-approved.
-- **RCS:** `sender` is a registered **RCS agent ID**, not a phone number. `content_type: "text"`, `content.text.message`. Use `sms_fallback` for non-RCS devices.
+- **RCS:** `sender` is an **RCS agent ID**, not a phone number. `content_type` is `text`, `media` or `rich_card` (one card, or a carousel of 2 to 10). Add `content.suggestions` for reply chips and link or call buttons. Set `sms_fallback` with both `sender` and `message`: without the sender, the SMS is never sent. The recipient must be E.164; local format is rejected.
