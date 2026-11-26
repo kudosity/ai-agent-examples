@@ -42,7 +42,8 @@ Every example reads its credentials from environment variables (see [`.env.examp
 | `KUDOSITY_API_KEY` | all examples | Your API key (Developers → API Settings). |
 | `KUDOSITY_SENDER` | SMS, MMS, and RCS SMS-fallback | A number or alphanumeric sender ID registered to your account. |
 | `KUDOSITY_WHATSAPP_SENDER` | WhatsApp examples | Your registered WhatsApp Business number (E.164). |
-| `KUDOSITY_RCS_AGENT_ID` | RCS examples | Your registered RCS agent ID — RCS sends through an agent, not a number. |
+| `KUDOSITY_RCS_AGENT_ID` | RCS examples | Your RCS agent ID — RCS sends through an agent, not a number. You create and launch the agent in the Kudosity app. |
+| `DELIVERY_IMAGE_URL` | `ai-delivery-update-rcs`, optional | An image for the rich card. A public `https` URL that doesn't redirect. |
 
 ## Examples
 
@@ -55,8 +56,8 @@ Every example reads its credentials from environment variables (see [`.env.examp
 | [ai-product-launch-mms](ai-product-launch-mms/) | MMS | An AI marketing workflow generates a message and sends an MMS with an image |
 | [ai-order-update-whatsapp-template](ai-order-update-whatsapp-template/) | WhatsApp | AI selects a pre-approved WhatsApp template for an order status update |
 | [ai-payment-reminder-whatsapp-template](ai-payment-reminder-whatsapp-template/) | WhatsApp | AI sends a transactional payment reminder via a pre-approved WhatsApp template |
-| [ai-delivery-update-rcs](ai-delivery-update-rcs/) | RCS | AI sends a rich RCS delivery update with automatic SMS fallback |
-| [ai-payment-reminder-rcs](ai-payment-reminder-rcs/) | RCS | AI sends a transactional payment reminder over RCS with SMS fallback |
+| [ai-delivery-update-rcs](ai-delivery-update-rcs/) | RCS | AI sends a delivery update as an RCS rich card with a tracking button, suggested replies and SMS fallback |
+| [ai-payment-reminder-rcs](ai-payment-reminder-rcs/) | RCS | AI sends a transactional payment reminder over RCS with a Pay now button and SMS fallback |
 
 ## How it works
 
